@@ -27,6 +27,7 @@ import (
 	_ "gitlab.com/rapidos/rapidos/inits/example"
 	_ "gitlab.com/rapidos/rapidos/inits/lio_local"
 	_ "gitlab.com/rapidos/rapidos/inits/minio"
+	_ "gitlab.com/rapidos/rapidos/inits/prometheus"
 )
 
 func listInits(title string) {

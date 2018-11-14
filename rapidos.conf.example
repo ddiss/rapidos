@@ -86,7 +86,7 @@ IP_ADDR2="192.168.155.102"
 HOSTNAME2="rapido2"
 #############################
 
-####### Parameters for lio_local init #######
+####### Parameters for lio-local init #######
 # IQN to use for the iSCSI target
 TARGET_IQN="iqn.2003-01.org.linux-iscsi:rapido"
 
