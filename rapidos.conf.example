@@ -1,0 +1,97 @@
+# Path to Linux kernel source. Prior to running a "cut_X" script, the kernel
+# should be built, with modules installed (see KERNEL_INSTALL_MOD_PATH below).
+#
+# e.g. KERNEL_SRC="/home/me/linux"
+KERNEL_SRC=""
+
+# If specified, this parameter defines the path that Dracut should use to
+# obtain compiled kernel modules. If left blank, Dracut will use its default
+# (e.g. /lib/modules) search path.
+# A value of "${KERNEL_SRC}/mods" makes sense when used alongside
+# "INSTALL_MOD_PATH=./mods make modules_install" during kernel compilation.
+KERNEL_INSTALL_MOD_PATH="${KERNEL_SRC}/mods"
+
+# bridge device provisioned by br_setup.sh
+# e.g. BR_DEV="br0"
+BR_DEV="br0"
+
+# If specified, a physical network interface to be connected to the bridge.
+# This should only be necessary if you wish to connect to the rapidos VMs from a
+# remote host.
+# e.g. BR_IF="eth0"
+#BR_IF=""
+
+# if specified, an address to configure for the bridge device
+BR_ADDR="192.168.155.1/24"
+
+# if specified, start a dhcp server, listening on $BR_DEV
+# e.g. BR_DHCP_SRV_RANGE="192.168.155.10,192.168.155.20,12h"
+#BR_DHCP_SRV_RANGE=""
+
+# Tap VM network device owner
+# e.g. TAP_USER="me"
+TAP_USER=""
+
+# extra qemu-kvm arguments to append for both VMs:
+# "-nographic" sees the emulated serial port redirected to the invoking console.
+# "-display none -daemonize" can be used to run VMs in the background, without
+# redirection.
+# "-device virtio-rng-pci" sees the guest make use of /dev/random on the
+# hypervisor for random number generation.
+#
+# e.g. QEMU_EXTRA_ARGS="-nographic -drive file=/dev/sdz,if=virtio,cache=none,format=raw,index=0"
+# e.g. QEMU_EXTRA_ARGS="-nographic -gdb tcp:127.0.0.1:1234"
+# e.g. QEMU_EXTRA_ARGS="-nographic -device virtio-rng-pci"
+QEMU_EXTRA_ARGS="-nographic"
+
+# kernel modules or files for which dynamic debug should be enabled
+# e.g. DYN_DEBUG_MODULES="rbd libceph"
+# e.g. DYN_DEBUG_FILES="drivers/block/rbd.c"
+#DYN_DEBUG_MODULES=""
+#DYN_DEBUG_FILES=""
+
+######### First VM #########
+# Tap tunnel interface provisioned by br_setup.sh, and used by vm.sh
+TAP_DEV0="tap0"
+
+# MAC address assigned to the VM
+# e.g. MAC_ADDR1="b8:ac:24:45:c5:01"
+MAC_ADDR1=""
+
+# When set to "1", use DHCP to obtain IP and hostname.
+#IP_ADDR1_DHCP="1"
+
+# IP address assigned to the VM during boot
+IP_ADDR1="192.168.155.101"
+
+# Static hostname assigned to the VM
+HOSTNAME1="rapido1"
+#############################
+
+######### Second VM #########
+# Tap tunnel interface provisioned by br_setup.sh, and used by vm.sh
+TAP_DEV1="tap1"
+
+# MAC address assigned to the VM
+# e.g. MAC_ADDR2="b8:ac:24:45:c5:02"
+MAC_ADDR2=""
+
+# When set to "1", use DHCP to obtain IP and hostname.
+#IP_ADDR2_DHCP="1"
+
+# Static IP address assigned to the VM during boot
+IP_ADDR2="192.168.155.102"
+
+# Static hostname assigned to the VM
+HOSTNAME2="rapido2"
+#############################
+
+####### Parameters for lio_local init #######
+# IQN to use for the iSCSI target
+TARGET_IQN="iqn.2003-01.org.linux-iscsi:rapido"
+
+# List of initiator IQNs granted full access to the iSCSI target. Defaults below
+# correspond to the libiscsi test utility.
+INITIATOR_IQNS="iqn.2007-10.com.github:sahlberg:libiscsi:iscsi-test \
+		iqn.2007-10.com.github:sahlberg:libiscsi:iscsi-test-2"
+#############################################
