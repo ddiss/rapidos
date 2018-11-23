@@ -64,7 +64,7 @@ func (params *cliParams) String() string {
 func (params *cliParams) Set(value string) error {
 	kv := strings.Split(value, "=")
 	if len(kv) != 2 {
-		return fmt.Errorf("not in <KEY>=<val> format\n", value)
+		return fmt.Errorf("%s not in <KEY>=<val> format\n", value)
 	}
 	params.confOverlay[kv[0]] = kv[1]
 	return nil
