@@ -16,8 +16,10 @@ Rapidos is a minimal Linux OS image generator and runner.
 - A thin wrapper around QEMU is provided for booting images
 
 
-Installing
-----------
+Building & Installing
+---------------------
+
+Ensure that you have a recent (1.11+) Go version.
 
 Get rapidos::
 
