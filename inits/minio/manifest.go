@@ -19,16 +19,18 @@ func init() {
 	manifest := rapidos.Manifest{
 		Name:  "minio",
 		Descr: "Object storage server",
-		Init:  "gitlab.com/rapidos/rapidos/inits/minio/uinit",
-		Pkgs: []string{
-			"github.com/minio/minio",
-		},
-		Kmods: []string{"zram", "lzo"},
-		Bins:  []string{"mkfs.xfs"},
-		Files: []string{},
-		// Use u-root binary builder so that pkgs with vendor subdirs
-		// are handled correctly.
 		Builder: "binary",
+		Inventory: rapidos.Inventory{
+			Init:  "gitlab.com/rapidos/rapidos/inits/minio/uinit",
+			Pkgs: []string{
+				"github.com/minio/minio",
+			},
+			Kmods: []string{"zram", "lzo"},
+			Bins:  []string{"mkfs.xfs"},
+			Files: []string{},
+			// Use u-root binary builder so that pkgs with vendor
+			// subdirs are handled correctly.
+		},
 		VMResources: rapidos.Resources{
 			Network: true,
 			CPUs:    2,

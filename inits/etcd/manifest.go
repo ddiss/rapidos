@@ -19,16 +19,18 @@ func init() {
 	manifest := rapidos.Manifest{
 		Name:  "etcd",
 		Descr: "Distributed key-value store",
-		Init:  "gitlab.com/rapidos/rapidos/inits/etcd/uinit",
-		Pkgs: []string{
-			"go.etcd.io/etcd",
-		},
-		Kmods: []string{"zram", "lzo"},
-		Bins:  []string{"mkfs.xfs"},
-		Files: []string{},
 		// Use u-root binary builder so that pkgs with vendor subdirs
 		// are handled correctly.
 		Builder: "binary",
+		Inventory: rapidos.Inventory{
+			Init:  "gitlab.com/rapidos/rapidos/inits/etcd/uinit",
+			Pkgs: []string{
+				"go.etcd.io/etcd",
+			},
+			Kmods: []string{"zram", "lzo"},
+			Bins:  []string{"mkfs.xfs"},
+			Files: []string{},
+		},
 		VMResources: rapidos.Resources{
 			Network: true,
 			CPUs:    2,

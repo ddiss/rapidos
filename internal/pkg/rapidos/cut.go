@@ -30,15 +30,15 @@ func Cut(conf *RapidosConf, m *Manifest, rdir string,
 	var err error
 	logger := log.New(os.Stderr, "", log.LstdFlags)
 
-	if len(m.Kmods) > 0 {
-		files, err = FindKmods(conf, m.Kmods)
+	if len(m.Inventory.Kmods) > 0 {
+		files, err = FindKmods(conf, m.Inventory.Kmods)
 		if err != nil {
 			return err
 		}
 	}
 
-	if len(m.Bins) > 0 {
-		bins, err := FindBins(m.Bins,
+	if len(m.Inventory.Bins) > 0 {
+		bins, err := FindBins(m.Inventory.Bins,
 			false) // ignoreMissing=false
 		if err != nil {
 			return err
@@ -46,13 +46,14 @@ func Cut(conf *RapidosConf, m *Manifest, rdir string,
 		files = append(files, bins...)
 	}
 
-	if len(m.Files) > 0 {
-		files = append(files, m.Files...)
+	if len(m.Inventory.Files) > 0 {
+		files = append(files, m.Inventory.Files...)
 	}
 
 	// u-root's base "init" is responsible for invoking the manifest
 	// specific "uinit", and subsequently interactive shell (rush)
-	pkgs := append(m.Pkgs, "github.com/u-root/u-root/cmds/init", m.Init)
+	pkgs := append(m.Inventory.Pkgs, "github.com/u-root/u-root/cmds/init",
+			m.Inventory.Init)
 
 	env := golang.Default()
 	env.CgoEnabled = false

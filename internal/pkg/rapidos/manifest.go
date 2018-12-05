@@ -15,11 +15,7 @@ import (
 	"log"
 )
 
-type Manifest struct {
-	// Name of init back-end
-	Name string
-	// short description of what this image does
-	Descr string
+type Inventory struct {
 	// init package runs immediately following boot..
 	// The stock u-root init process is responsible for invoking the "uinit"
 	// provided with a given manifest
@@ -38,8 +34,18 @@ type Manifest struct {
 	// <local source>:<initramfs dest>
 	// TODO use u-root/cmds/which to locate bins under PATH (+sbin)
 	Files []string
+}
+
+type Manifest struct {
+	// Name of init back-end
+	Name string
+	// short description of what this image does
+	Descr string
 	// u-root builder type. "bb" (default), "binary" or "source"
 	Builder string
+
+	// inventory includes a list of all image dependencies
+	Inventory Inventory
 
 	// VMResources are different from the rest of the Manifest in that they are
 	// considered at VM boot time.

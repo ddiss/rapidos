@@ -19,25 +19,27 @@ func init() {
 	manifest := rapidos.Manifest{
 		Name:  "lio-local",
 		Descr: "LIO iSCSI target",
-		Init:  "gitlab.com/rapidos/rapidos/inits/lio_local/uinit",
-		Pkgs: []string{
-			// The following pkgs aren't strictly needed, but
-			// provide a nice interactive shell to play with
-			// once Init has completed...
-			"github.com/u-root/u-root/xcmds/rush",
-			"github.com/u-root/u-root/cmds/ls",
-			"github.com/u-root/u-root/cmds/pwd",
-			"github.com/u-root/u-root/cmds/cat",
-			"github.com/u-root/u-root/cmds/dmesg",
-			"github.com/u-root/u-root/cmds/df",
-			"github.com/u-root/u-root/cmds/echo",
-			"github.com/u-root/u-root/cmds/mkdir",
-			"github.com/u-root/u-root/cmds/shutdown",
+		Inventory: rapidos.Inventory{
+			Init:  "gitlab.com/rapidos/rapidos/inits/lio_local/uinit",
+			Pkgs: []string{
+				// The following pkgs aren't strictly needed,
+				// but provide a nice interactive shell to play
+				// with once Init has completed...
+				"github.com/u-root/u-root/xcmds/rush",
+				"github.com/u-root/u-root/cmds/ls",
+				"github.com/u-root/u-root/cmds/pwd",
+				"github.com/u-root/u-root/cmds/cat",
+				"github.com/u-root/u-root/cmds/dmesg",
+				"github.com/u-root/u-root/cmds/df",
+				"github.com/u-root/u-root/cmds/echo",
+				"github.com/u-root/u-root/cmds/mkdir",
+				"github.com/u-root/u-root/cmds/shutdown",
+			},
+			Kmods: []string{"zram", "lzo", "iscsi_target_mod",
+				"target_core_mod", "target_core_iblock"},
+			Bins:  []string{},
+			Files: []string{},
 		},
-		Kmods: []string{"zram", "lzo", "iscsi_target_mod",
-			"target_core_mod", "target_core_iblock"},
-		Bins:  []string{},
-		Files: []string{},
 		VMResources: rapidos.Resources{
 			Network: true,
 			CPUs:    2,

@@ -19,16 +19,18 @@ func init() {
 	manifest := rapidos.Manifest{
 		Name:  "prometheus",
 		Descr: "Monitoring system",
-		Init:  "gitlab.com/rapidos/rapidos/inits/prometheus/uinit",
-		Pkgs: []string{
-			"github.com/prometheus/prometheus/cmd/prometheus",
-		},
-		Kmods: []string{},
-		Bins:  []string{},
-		Files: []string{},
 		// Use u-root binary builder so that pkgs with vendor subdirs
 		// are handled correctly.
 		Builder: "binary",
+		Inventory: rapidos.Inventory{
+			Init: "gitlab.com/rapidos/rapidos/inits/prometheus/uinit",
+			Pkgs: []string{
+				"github.com/prometheus/prometheus/cmd/prometheus",
+			},
+			Kmods: []string{},
+			Bins:  []string{},
+			Files: []string{},
+		},
 		VMResources: rapidos.Resources{
 			Network: true,
 			CPUs:    2,
