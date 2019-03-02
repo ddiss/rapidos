@@ -47,6 +47,7 @@ func usage() {
 type cliParams struct {
 	list        bool
 	debug       bool
+	logPath    string
 	confPath    string
 	imgPath     string
 	confOverlay map[string]string
@@ -81,6 +82,8 @@ func main() {
 	flag.Usage = usage
 	flag.BoolVar(&params.list, "list", false, "List available inits")
 	flag.BoolVar(&params.debug, "debug", false, "Log debug messages")
+	flag.StringVar(&params.logPath, "logfile", "",
+		"log file `path`. Logs to stdout by default")
 	flag.StringVar(&params.confPath, "conf",
 		path.Join(rdir, "rapidos.conf"),
 		"rapidos.conf config file `path`")
@@ -98,6 +101,17 @@ func main() {
 		"Directory `path` for QEMU PID files")
 
 	flag.Parse()
+
+	if len(params.logPath) > 0 {
+		f, err := os.OpenFile(params.logPath,
+				os.O_WRONLY|os.O_CREATE|os.O_APPEND,
+				0644)
+		if err != nil {
+			log.Fatalf("failed to open logfile: %v", err)
+		}
+		defer f.Close()
+		log.SetOutput(f)
+	}
 
 	if len(flag.Args()) != 0 {
 		fmt.Printf("Error: unsupported trailing parameter(s)\n")
