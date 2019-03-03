@@ -30,6 +30,12 @@ func Cut(conf *RapidosConf, m *Manifest, rdir string,
 	var err error
 	logger := log.New(os.Stderr, "", log.LstdFlags)
 
+	// finalize inventory if init provided an optional callback
+	err = RenderManifest(*conf, m)
+	if err != nil {
+		return err
+	}
+
 	if len(m.Inventory.Kmods) > 0 {
 		files, err = FindKmods(conf, m.Inventory.Kmods)
 		if err != nil {

@@ -47,6 +47,10 @@ type Manifest struct {
 	// inventory includes a list of all image dependencies
 	Inventory Inventory
 
+	// optional callback which can update Inventory based on the provided
+	// config.
+	InventoryCB func(RapidosConf, *Inventory) error
+
 	// VMResources are different from the rest of the Manifest in that they are
 	// considered at VM boot time.
 	VMResources Resources
@@ -90,6 +94,14 @@ func LookupManifest(name string) *Manifest {
 		return &m
 	}
 	return nil
+}
+
+// finalize inventory for manifest based on current conf
+func RenderManifest(conf RapidosConf, m *Manifest) error {
+	if m.InventoryCB == nil {
+		return nil
+	}
+	return m.InventoryCB(conf, &m.Inventory)
 }
 
 func IterateManifests(cb func(m Manifest)) {
