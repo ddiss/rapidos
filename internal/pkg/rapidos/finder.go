@@ -32,6 +32,7 @@ func FindKmods(conf *RapidosConf, kmodNames []string) ([]string, error) {
 	opts := kmodule.ProbeOpts{
 		RootDir: kmodsInfo.KernelInstModPath,
 		KVer:    kmodsInfo.KernelVersion,
+		IgnoreProcMods: true,
 		DryRunCB: func(modPath string) {
 			var trimmer string
 			// Ensure that any leading '/' from dst is trimmed...
