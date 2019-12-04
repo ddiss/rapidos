@@ -46,7 +46,7 @@ func init() {
 			// Kmods contains a list of kernel modules that should
 			// be placed in the initramfs image. modules.dep
 			// dependencies will be automatically added.
-			Kmods: []string{"zram", "lzo"},
+			Kmods: []string{"zram", "lzo", "lzo-rle"},
 			// Bins specifies which binaries from the host system
 			// should be included in the image.
 			Bins:  []string{"mkfs.xfs"},

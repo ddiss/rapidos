@@ -27,7 +27,7 @@ func init() {
 			Pkgs: []string{
 				"go.etcd.io/etcd",
 			},
-			Kmods: []string{"zram", "lzo"},
+			Kmods: []string{"zram", "lzo", "lzo-rle"},
 			Bins:  []string{"mkfs.xfs"},
 			Files: []string{},
 		},

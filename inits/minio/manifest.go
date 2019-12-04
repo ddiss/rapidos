@@ -25,7 +25,7 @@ func init() {
 			Pkgs: []string{
 				"github.com/minio/minio",
 			},
-			Kmods: []string{"zram", "lzo"},
+			Kmods: []string{"zram", "lzo", "lzo-rle"},
 			Bins:  []string{"mkfs.xfs"},
 			Files: []string{},
 			// Use u-root binary builder so that pkgs with vendor

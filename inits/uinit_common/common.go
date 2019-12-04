@@ -84,6 +84,10 @@ func ProvisionZram(disksize string) string {
 	if err != nil {
 		log.Fatalf("failed to load lzo kmod: %v", err)
 	}
+	err = kmodule.Probe("lzo-rle", "")
+	if err != nil {
+		log.Fatalf("failed to load lzo-rle kmod: %v", err)
+	}
 	err = kmodule.Probe("zram", "num_devices=0")
 	if err != nil {
 		log.Fatalf("failed to load zram kmod: %v", err)
