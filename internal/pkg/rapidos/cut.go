@@ -58,7 +58,7 @@ func Cut(conf *RapidosConf, m *Manifest, rdir string,
 
 	// u-root's base "init" is responsible for invoking the manifest
 	// specific "uinit", and subsequently interactive shell (rush)
-	pkgs := append(m.Inventory.Pkgs, "github.com/u-root/u-root/cmds/init",
+	pkgs := append(m.Inventory.Pkgs, "github.com/u-root/u-root/cmds/core/init",
 			m.Inventory.Init)
 
 	env := golang.Default()

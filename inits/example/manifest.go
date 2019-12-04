@@ -32,16 +32,16 @@ func init() {
 				// The following pkgs aren't strictly needed,
 				// but provide a nice interactive shell to play
 				// with once Init has completed...
-				"github.com/u-root/u-root/xcmds/rush",
-				"github.com/u-root/u-root/cmds/ls",
-				"github.com/u-root/u-root/cmds/pwd",
-				"github.com/u-root/u-root/cmds/cat",
-				"github.com/u-root/u-root/cmds/modprobe",
-				"github.com/u-root/u-root/cmds/dmesg",
-				"github.com/u-root/u-root/cmds/mount",
-				"github.com/u-root/u-root/cmds/df",
-				"github.com/u-root/u-root/cmds/mkdir",
-				"github.com/u-root/u-root/cmds/shutdown",
+				"github.com/u-root/u-root/cmds/exp/rush",
+				"github.com/u-root/u-root/cmds/core/ls",
+				"github.com/u-root/u-root/cmds/core/pwd",
+				"github.com/u-root/u-root/cmds/core/cat",
+				"github.com/u-root/u-root/cmds/exp/modprobe",
+				"github.com/u-root/u-root/cmds/core/dmesg",
+				"github.com/u-root/u-root/cmds/core/mount",
+				"github.com/u-root/u-root/cmds/core/df",
+				"github.com/u-root/u-root/cmds/core/mkdir",
+				"github.com/u-root/u-root/cmds/core/shutdown",
 			},
 			// Kmods contains a list of kernel modules that should
 			// be placed in the initramfs image. modules.dep
