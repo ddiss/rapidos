@@ -284,3 +284,7 @@ func (conf *RapidosConf) GenGob() (*bytes.Buffer, error) {
 	}
 	return &b, nil
 }
+
+func (conf *RapidosConf) GetDirPath(key string) (string, error) {
+	return checkDirVal(conf.f, key)
+}

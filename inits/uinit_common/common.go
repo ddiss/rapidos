@@ -18,6 +18,7 @@ import (
 	"log"
 	"os"
 	"strings"
+	"path"
 
 	"github.com/u-root/u-root/pkg/kmodule"
 	"github.com/u-root/u-root/pkg/mount"
@@ -114,4 +115,41 @@ func GetiSCSIConf(conf *RapidosConfMap) (string, []string) {
 	// missing INITIATOR_IQNS config is not an error
 
 	return conf.f["TARGET_IQN"], strings.Fields(conf.f["INITIATOR_IQNS"])
+}
+
+type CifsOpts struct {
+	Server string
+	Share string
+	Domain string
+	User string
+	Pw string
+	MountOpts string
+}
+
+func GetCifsOpts(conf *RapidosConfMap) CifsOpts {
+	// TODO check for required options
+	return CifsOpts{
+		Server: conf.f["CIFS_SERVER"],
+		Share:  conf.f["CIFS_SHARE"],
+		Domain: conf.f["CIFS_DOMAIN"],
+		User:   conf.f["CIFS_USER"],
+		Pw:     conf.f["CIFS_PW"],
+		MountOpts: conf.f["CIFS_MOUNT_OPTS"],
+	}
+}
+
+func GetDirPath(conf *RapidosConfMap, key string) (string) {
+	val := conf.f[key]
+	if len(val) == 0 {
+		log.Fatalf("%s not configured", key)
+	}
+	stat, err := os.Stat(val)
+	if err != nil {
+		log.Fatalf("%v", err)
+	}
+	if !stat.IsDir() {
+		log.Fatalf("%s is not a directory", val)
+	}
+
+	return path.Clean(val)
 }

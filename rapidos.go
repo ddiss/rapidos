@@ -23,6 +23,7 @@ import (
 	"gitlab.com/rapidos/rapidos/internal/pkg/rapidos"
 
 	// inits registered via AddManifest() callback
+	_ "gitlab.com/rapidos/rapidos/inits/cifsd"
 	_ "gitlab.com/rapidos/rapidos/inits/etcd"
 	_ "gitlab.com/rapidos/rapidos/inits/example"
 	_ "gitlab.com/rapidos/rapidos/inits/lio_local"
@@ -47,7 +48,7 @@ func usage() {
 type cliParams struct {
 	list        bool
 	debug       bool
-	logPath    string
+	logPath     string
 	confPath    string
 	imgPath     string
 	confOverlay map[string]string
@@ -104,8 +105,8 @@ func main() {
 
 	if len(params.logPath) > 0 {
 		f, err := os.OpenFile(params.logPath,
-				os.O_WRONLY|os.O_CREATE|os.O_APPEND,
-				0644)
+			os.O_WRONLY|os.O_CREATE|os.O_APPEND,
+			0644)
 		if err != nil {
 			log.Fatalf("failed to open logfile: %v", err)
 		}
