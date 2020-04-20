@@ -58,7 +58,7 @@ func EnableDynDebug(conf *RapidosConfMap) {
 
 	_, err := os.Stat(dynDebugCtrlPath)
 	if os.IsNotExist(err) {
-		err = mount.Mount("debugfs", "/sys/kernel/debug/", "debugfs", "", 0)
+		_, err = mount.Mount("debugfs", "/sys/kernel/debug/", "debugfs", "", 0)
 		if err != nil {
 			log.Fatalf("mount failed: %v", err)
 		}

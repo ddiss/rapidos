@@ -49,7 +49,7 @@ func main() {
 	uinit_common.EnableDynDebug(c)
 	targetIQN, _ := uinit_common.GetiSCSIConf(c)
 
-	err = mount.Mount("configfs", "/sys/kernel/config/", "configfs", "", 0)
+	_, err = mount.Mount("configfs", "/sys/kernel/config/", "configfs", "", 0)
 	if err != nil {
 		log.Fatalf("mount failed: %v", err)
 	}

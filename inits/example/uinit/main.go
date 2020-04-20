@@ -41,7 +41,7 @@ func main() {
 		log.Fatalf("mkfs failed: %v", err)
 	}
 
-	err = mount.Mount(zramDev, "/root", "xfs", "", 0)
+	_, err = mount.Mount(zramDev, "/root", "xfs", "", 0)
 	if err != nil {
 		log.Fatalf("mount failed: %v", err)
 	}
