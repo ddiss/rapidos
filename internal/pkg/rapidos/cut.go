@@ -98,7 +98,7 @@ func Cut(conf *RapidosConf, m *Manifest, rdir string,
 		return err
 	}
 
-	w, err := archiver.OpenWriter(logger, imgPath, "", "")
+	w, err := archiver.OpenWriter(logger, imgPath)
 	if err != nil {
 		return err
 	}
